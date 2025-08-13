@@ -1,15 +1,16 @@
 export const navLinks = [
-  { label: "Home", href: "#" },
-  { label: "About", href: "#about" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "about" },
   {
     label: "Product",
-    href: "#product",
+    href: "product",
     subMenu: [
-      { label: "Pumps", href: "#pumps" },
-      { label: "Sprinklers", href: "#sprinklers" },
-      { label: "Drip Systems", href: "#drip" },
+      { label: "Pumps", href: "pumps" },
+      { label: "Sprinklers", href: "sprinklers" },
+      { label: "Drip Systems", href: "drip" },
     ],
   },
-  { label: "Contact", href: "#contact" },
-  { label: "Blog", href: "#blog" },
+  { label: "Contact", href: "contact" },
+  { label: "Blog", href: "blog" },
 ];
+
