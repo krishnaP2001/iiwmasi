@@ -141,7 +141,7 @@
 //   );
 // }
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   FaFacebook,
   FaTwitter,
@@ -153,11 +153,13 @@ import {
 import { MdEmail, MdLocationOn } from "react-icons/md";
 import { logo } from "@/assets";
 import { navLinks } from "../utils/NavLinks";
+import Link from "next/link";
 
 export default function Header() {
   const [isSticky, setIsSticky] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   useEffect(() => {
     const handleScroll = () => setIsSticky(window.scrollY > 50);
@@ -223,11 +225,13 @@ export default function Header() {
           {/* Logo with Hover Animation */}
           <div className="flex items-center group cursor-pointer bg-black rounded-xl shadow-lg mr-4">
             <div className="relative ">
-              <img
-                src={logo.src}
-                alt="IIWMASI Logo"
-                className="w-20 h-20 object-cover rounded-xl"
-              />
+              <Link href="/">
+                <img
+                  src={logo.src}
+                  alt="IIWMASI Logo"
+                  className="w-20 h-20 object-cover rounded-xl cursor-pointer"
+                />
+              </Link>
               {/* <div className="absolute -inset-2 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-lg"></div> */}
             </div>
             <div className="flex flex-col">
@@ -246,14 +250,24 @@ export default function Header() {
               <div
                 key={idx}
                 className="relative group"
-                onMouseEnter={() => setOpenDropdown(idx)}
-                onMouseLeave={() => setOpenDropdown(null)}
+                onMouseEnter={() => {
+                  if (timeoutRef.current) {
+                    clearTimeout(timeoutRef.current);
+                  }
+                  setOpenDropdown(idx);
+                }}
+                onMouseLeave={() => {
+                  timeoutRef.current = setTimeout(() => {
+                    setOpenDropdown(null);
+                  }, 150);
+                }}
               >
+                {/* Top-level link */}
                 <a
                   href={link.href}
-                  className={`relative px-6 py-3 rounded-xl transition-all duration-300 flex items-center gap-2 bg-emerald-50 group-hover:text-emerald-700 group-hover:bg-emerald-50 group-hover:shadow-lg ${
-                    openDropdown === idx ? "bg-emerald-50 text-emerald-700" : ""
-                  }`}
+                  className={`relative px-6 py-3 rounded-xl transition-all duration-300 flex items-center gap-2 bg-emerald-50 
+              group-hover:text-emerald-700 group-hover:bg-emerald-50 group-hover:shadow-lg
+              ${openDropdown === idx ? "bg-emerald-50 text-emerald-700" : ""}`}
                 >
                   <span className="relative z-10">{link.label}</span>
                   {link.subMenu && (
@@ -263,24 +277,34 @@ export default function Header() {
                       }`}
                     />
                   )}
-
                   {/* Hover background effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-emerald-100 to-teal-100 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 scale-95 group-hover:scale-100"></div>
                 </a>
 
-                {/* Enhanced Dropdown */}
-                {link.subMenu && openDropdown === idx && (
-                  <div className="absolute left-0 top-full mt-2 bg-white/95 backdrop-blur-lg shadow-2xl rounded-2xl overflow-hidden border border-gray-100 min-w-[220px] animate-in slide-in-from-top-2 duration-300">
-                    <div className="p-2">
-                      {link.subMenu.map((sub, subIdx) => (
-                        <a
-                          key={subIdx}
-                          href={sub.href}
-                          className="block px-4 py-3 rounded-xl hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 hover:text-emerald-700 transition-all duration-200 text-gray-700 font-medium"
-                        >
-                          {sub.label}
-                        </a>
-                      ))}
+                {/* Dropdown menu with invisible bridge */}
+                {link.subMenu && (
+                  <div
+                    className={`absolute left-0 top-full transition-all duration-300 z-50 ${
+                      openDropdown === idx
+                        ? "opacity-100 visible translate-y-0"
+                        : "opacity-0 invisible -translate-y-2 pointer-events-none"
+                    }`}
+                  >
+                    {/* Invisible bridge to prevent gap issues */}
+                    <div className="h-2 w-full"></div>
+
+                    <div className="bg-white/95 backdrop-blur-lg shadow-2xl rounded-2xl overflow-hidden border border-gray-100 min-w-[220px]">
+                      <div className="p-2">
+                        {link.subMenu.map((sub, subIdx) => (
+                          <a
+                            key={subIdx}
+                            href={sub.href}
+                            className="block px-4 py-3 rounded-xl hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 hover:text-emerald-700 transition-all duration-200 text-gray-700 font-medium"
+                          >
+                            {sub.label}
+                          </a>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 )}

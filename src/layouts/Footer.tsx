@@ -40,7 +40,7 @@ export default function Footer() {
           </h3>
           <ul className="space-y-2">
             <li className="flex items-center gap-2">
-              <MdEmail className="text-yellow-300" /> info@.com
+              <MdEmail className="text-yellow-300" /> info@iiwmasi.com
             </li>
             <li className="flex items-center gap-2">
               <MdPhone className="text-yellow-300" /> +91 00000 00000

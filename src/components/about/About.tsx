@@ -3,11 +3,11 @@ import React from "react";
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center">
+    <div className="bg-gray-100 flex flex-col items-center">
       {/* Header */}
       <header className="w-full bg-green-600 text-white py-6 shadow-md">
-        <h1 className="text-3xl font-bold text-center">
-          Smart Irrigation Project
+        <h1 className="text-2xl font-bold text-center">
+          Advance Smart Irrigator
         </h1>
       </header>
 
@@ -16,7 +16,7 @@ const About = () => {
         {/* Left - Text */}
         <div className="flex-1">
           <h2 className="text-2xl font-semibold text-green-700 mb-4">
-            About the Project
+            About
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4">
             Our Smart Irrigation Project leverages modern IoT devices, weather
