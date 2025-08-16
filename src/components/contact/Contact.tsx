@@ -39,7 +39,7 @@ const Contact = () => {
               Get in Touch
             </h2>
             <p className="text-gray-600 mb-4">
-              We'd love to hear from you! Whether you have a question about
+              We&rsquo;d love to hear from you! Whether you have a question about
               features, trials, pricing, or anything else, our team is ready to
               answer all your questions.
             </p>

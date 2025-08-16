@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { notfound } from "@/assets";
+import Link from "next/link";
 
 export default function NotFound() {
   return (
@@ -10,12 +11,12 @@ export default function NotFound() {
         We’re working hard to bring you something amazing. Please check back
         soon!
       </p>
-      <a
+      <Link
         href="/"
         className="mt-6 px-6 py-3 bg-green-500 text-white rounded-lg hover:green-blue-700 transition"
       >
         Go Back Home
-      </a>
+      </Link>
     </div>
   );
 }

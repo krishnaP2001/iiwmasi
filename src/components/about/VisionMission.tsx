@@ -32,7 +32,7 @@ export default function VisionMissionComponent() {
               
               <div className="space-y-6">
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  To create a world where every farm thrives through intelligent, sustainable water management that ensures food security while preserving our planet's precious water resources for future generations.
+                  To create a world where every farm thrives through intelligent, sustainable water management that ensures food security while preserving our planet&rsquo;s precious water resources for future generations.
                 </p>
                 
                 <div className="grid gap-4">
